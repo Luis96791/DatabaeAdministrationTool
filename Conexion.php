@@ -6,12 +6,13 @@
  */
 
 class Conexion {
-       
+    public $connection;
+    
     function conectar($database, $usuario, $contrasena) {
         error_reporting(0);
-        $connection = odbc_connect("Driver={Devart ODBC Driver for ASE};Server=DESKTOP-CHGF1UJ;Database=".$database.";", 
+        $this->connection = odbc_connect("Driver={Devart ODBC Driver for ASE};Server=DESKTOP-CHGF1UJ;Database=".$database.";", 
                 $usuario, $contrasena);
-        if($connection) {
+        if($this->connection) {
             return true;
         }
         else {

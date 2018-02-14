@@ -46,7 +46,18 @@
             <br><br>
             <div>
                 <label>Base de Datos:
-                    <input type="text" name="database" value="<?php echo $database;?>"/>
+                    <select name="database">
+                        <option value="<?php echo $database="master"?>">master</option>
+                        <option value="<?php echo $database="model"?>">model</option>
+                        <option value="<?php echo $database="pubs2"?>">pubs2</option>
+                        <option value="<?php echo $database="pubs3"?>">pubs3</option>
+                        <option value="<?php echo $database="sybpcidb"?>">sybpcidb</option>
+                        <option value="<?php echo $database="sybsystemdb"?>">sybsystemdb</option>
+                        <option value="<?php echo $database="sybsystemprocs"?>">sybsystemprocs</option>
+                        <option value="<?php echo $database="tempdb"?>">tempdb</option>
+                        <option value="<?php echo $database="test"?>">test</option>
+                    </select>
+                    <!--<input type="text" name="database" value="<?php echo $database;?>"/>-->
                 </label>
             </div>
             <br><br>
