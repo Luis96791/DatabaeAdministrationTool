@@ -1,6 +1,7 @@
 
 <html>
     <head>
+        <title>Menu Principal</title>
         <meta charset="utf-8"/>
         <link href="style/css/layout.css" rel="stylesheet" type="text/css"/>
         <link href="style/css/menu.css" rel="stylesheet" type="text/css"/>

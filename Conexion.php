@@ -7,6 +7,7 @@
 
 class Conexion {
     public $connection;
+    public $HOST = "DESKTOP-CHGF1UJ";
     
     function conectar($database, $usuario, $contrasena) {
         error_reporting(0);
