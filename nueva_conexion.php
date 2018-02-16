@@ -6,9 +6,22 @@
 <html>
     <head>
         <title>Acceder</title>
+        <h1 align="center">Abrir Sesion</h1>
     </head>
+    <style>
+        label, input, select {
+            font-size: 20px;
+        }
+        
+        fieldset {
+            margin: 40 auto;
+            align-content: center;
+            border-radius: 5px;
+            width: 400px;
+        }   
+    </style>
     
-    <body>
+    <body background="imagen.png">
         <?php
             error_reporting(0); 
             $usuario = test_input($_POST["usuario"]);
@@ -31,7 +44,8 @@
                 }    
             }
         ?>
-        <form method="POST" action="index.php">
+        <fieldset >
+            <form id="formulario" method="POST" action="index.php">
             <div>
                 <label>Usuario:  
                     <input type="text" name="usuario" value="<?php echo $usuario;?>"/>
@@ -61,8 +75,10 @@
                 </label>
             </div>
             <br><br>
-            <input type="submit" name="submit" value="Submit"/>
-        </form>
+            <input type="submit" name="submit" value="Acceder"/>
+            </form>
+        </fieldset>
+        
     </body>
      
 </html>

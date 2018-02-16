@@ -22,29 +22,23 @@
             $conexion = new Conexion();
             $conexion->conectar($database, $usuario, $contrasena);
             
-            $result = odbc_tables($conexion->connection);
+            $result = odbc_exec($conexion->connection, "select name from dbo.sysobjects where type='SF'");
         
             echo "<table border = 1 cellspacing = 1 cellpadding = 1 align=center>
             		<tr>
                         <th></th>
-            			<th>VIEW_QUALIFIER</th>
-            			<th>VIEW_OWNER</th>
             			<th>VIEW_NAME</th>
                     </tr>";
             
             $views = array();
             $contador = 0;
             while(odbc_fetch_row($result)){
-                if(odbc_result($result, "TABLE_TYPE")=="FUNCTION") {
-                        $contador++;
-                    	echo "
-                    		<tr>
-                                <td>$contador</td>
-                    			<td>".odbc_result($result, 1)."</td>
-                    			<td>".odbc_result($result, 2)."</td>
-                    			<td>".odbc_result($result, 3)."</td>
-                    		</tr>";
-                }
+                $contador++;
+            	echo "
+            		<tr>
+                        <td>$contador</td>
+            			<td>".odbc_result($result, 1)."</td>
+            		</tr>";
             }
         
             echo "</table>";

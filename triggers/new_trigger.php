@@ -4,6 +4,7 @@
  * @author gencyolcu
  * @copyright 2018
  */
+
     include 'C:\xampp\htdocs\ADMIN\Conexion.php';
     include 'C:\xampp\htdocs\ADMIN\Scripts.php';
     
@@ -12,14 +13,14 @@
     $usuario = $_GET['usuario'];
     $contrasena = $_GET['contrasena'];
     $script->setDatabase($_GET['database']);
-    $script->newTableDDL();   
+    $script->newTriggerDDL();   
     
     $_sql = "";
 ?>
 <html>
     <head>
-        <title>Nueva Tabla</title>
-        <h1 align="center">Crear Tabla
+        <title>Nuevo Trigger</title>
+        <h1 align="center">Crear Trigger
             <h3>Vista DDL</h3>
         </h1>
         
@@ -36,7 +37,7 @@
         
     </head>
     <body>
-        <form method="get" action="http://localhost:8080/ADMIN/tables/nueva_tabla.php/?usuario=<?php echo $usuario;?>&
+        <form method="get" action="http://localhost:8080/ADMIN/triggers/new_trigger.php/?usuario=<?php echo $usuario;?>&
                                 contrasena=<?php echo $contrasena;?>&
                                 database=<?php echo $script->getDatabase();?>">
             <?php $_sql = $script->getSql() ?>
@@ -61,10 +62,10 @@
         
         $result = odbc_exec($conexion->connection, $_sql);
         if(!$result) {
-            echo "<script>alert('No se ha podido crear la tabla..!')</script>";
+            echo "<script>alert('No se ha podido crear el Trigger..!')</script>";
             echo    odbc_error($conexion->connection).": ".odbc_errormsg($conexion->connection);
         } else {
-            echo "<script>alert('Se ha creado la nueva tabla..!')</script>";
+            echo "<script>alert('Se ha creado el nuevo Trigger..!')</script>";
         }   
     }
 ?>

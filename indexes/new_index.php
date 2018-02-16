@@ -12,14 +12,14 @@
     $usuario = $_GET['usuario'];
     $contrasena = $_GET['contrasena'];
     $script->setDatabase($_GET['database']);
-    $script->newTableDDL();   
+    $script->newIndexDDL();   
     
     $_sql = "";
 ?>
 <html>
     <head>
-        <title>Nueva Tabla</title>
-        <h1 align="center">Crear Tabla
+        <title>Nuevo Indice</title>
+        <h1 align="center">Crear Indice
             <h3>Vista DDL</h3>
         </h1>
         
@@ -36,7 +36,7 @@
         
     </head>
     <body>
-        <form method="get" action="http://localhost:8080/ADMIN/tables/nueva_tabla.php/?usuario=<?php echo $usuario;?>&
+        <form method="get" action="http://localhost:8080/ADMIN/indexes/new_index.php/?usuario=<?php echo $usuario;?>&
                                 contrasena=<?php echo $contrasena;?>&
                                 database=<?php echo $script->getDatabase();?>">
             <?php $_sql = $script->getSql() ?>
@@ -54,17 +54,35 @@
 </html>
 
 <?php 
+    
+    $conexion = new Conexion();
+    $conexion->conectar($script->getDatabase(), $usuario, $contrasena); 
+    
+    $result1 = odbc_tables($conexion->connection);
+        
+    $tables = array();
+    echo "<label>Seleccione una Tabla: ";
+        echo "<select name=table>";
+    while(odbc_fetch_row($result1)){
+        if(odbc_result($result1, "TABLE_TYPE")=="TABLE") {
+            	echo "
+                        <option value=".odbc_result($result1, 3).">".odbc_result($result1, 3)."</option>
+                    ";
+        }
+    }
+        echo "</select>";
+    echo "</label>";
+
     if(isset($_GET["ejecutar"])) {
         $_sql = $_GET['nuevo_sql'];
-        $conexion = new Conexion();
-        $conexion->conectar($script->getDatabase(), $usuario, $contrasena);                        
-        
+                               
         $result = odbc_exec($conexion->connection, $_sql);
         if(!$result) {
-            echo "<script>alert('No se ha podido crear la tabla..!')</script>";
+            echo "<script>alert('No se ha podido crear el Indice..!')</script>";
             echo    odbc_error($conexion->connection).": ".odbc_errormsg($conexion->connection);
         } else {
-            echo "<script>alert('Se ha creado la nueva tabla..!')</script>";
-        }   
+            echo "<script>alert('Se ha creado el nuevo Indice..!')</script>";
+        }
+        odbc_close($conexion->connection);   
     }
 ?>
